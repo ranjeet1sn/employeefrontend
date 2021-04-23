@@ -1,0 +1,195 @@
+<div class="container mt-3">
+    <div class="upper-div">
+        <div>
+        <button type="button" (click)="addTask()"  *ngIf="!showCalendar" [disabled]="!isAdmin" class="btn btn-primary">Add Task</button>
+        <button type="button" (click)="openBottomSheet()"  class="btn btn-success ml-3">My Task</button>
+    </div>
+        <mat-slide-toggle (change)="onShowCalender($event)">Show In Calendar Mode</mat-slide-toggle>
+    </div>
+</div>
+<hr>
+<div class="inner-div">
+<p>All Task</p>
+<mat-form-field  appearance="outline"*ngIf="assignee &&assignee!=null">
+  <mat-label>Assinged to</mat-label>
+<mat-select (selectionChange)="removeFilter($event)" [formControl]="assignTo"  [compareWith]="getAssignee">
+  <mat-option value="null">Clear Filter</mat-option>
+   <mat-option [value]="assignee">
+    <button mat-mini-fab color="accent" [ngStyle]="{backgroundColor:userColor}">
+      <mat-icon class="ml-2">person</mat-icon>
+     </button>
+     {{assignee|short}}</mat-option>
+</mat-select>
+</mat-form-field>
+<mat-icon (click)="downloadPDF()" class="pdf"  *ngIf="!showCalendar">picture_as_pdf</mat-icon>
+<mat-icon class="setting-icon" (click)="addStatus()" [ngClass]="{'disable-button':!isAdmin}">settings</mat-icon>
+</div>
+<ng-container *ngIf="events &&events.length>0">
+<ng-container  *ngIf="!showCalendar ">
+  
+<mat-table matSort mat-table [dataSource]="dataSource"  class="mat-elevation-z8 common-style">
+    <ng-container matColumnDef="select" >
+      <mat-cell *matHeaderCellDef>
+        <mat-checkbox [disabled]="!isAdmin" (change)="$event ? masterToggle() : null"
+        (change)="onChange($event)"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </mat-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox  [disabled]="!isAdmin"  (click)="$event.stopPropagation()"
+        (change)="onChange(row)"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell  *matHeaderCellDef mat-sort-header> Name. </mat-header-cell>
+    <mat-cell  *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="assginedto">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Assgined To </mat-header-cell>
+     <mat-cell  mat-cell *matCellDef="let element" [style.color]="element.assignee.color"> {{element.assignee.email|short}} </mat-cell >
+  </ng-container>
+
+  <ng-container matColumnDef="priority">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.priority}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.date|date}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <button mat-button [ngStyle]="{'backgroundColor':element.status.color,'color':'#fff'}">{{element.status.status}}</button> </mat-cell>
+  </ng-container>
+  <!-- <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <mat-icon class="mt-2 mr-5 delete-icon" [ngClass]="{'disable-button':!isAdmin}" (click)='deleteEmployee(element._id)'>delete</mat-icon> </mat-cell>
+  </ng-container> -->
+  <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  <!-- Row shown when there is no matching data. -->
+  
+</mat-table>
+      <mat-paginator class="common-style"  [length]="totalPost" [pageSize]="postPerPage" [pageSizeOptions]="postSizeOptions "
+      (page)="onPageChange($event)"></mat-paginator>
+</ng-container>
+<hr  *ngIf="showCalendar">
+<ng-container  *ngIf="showCalendar">
+    <div class="row text-center">
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Previous
+            </div>
+            <div
+              class="btn btn-outline-secondary"
+              mwlCalendarToday
+              [(viewDate)]="viewDate"
+            >
+              Today
+            </div>
+            <div
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Next
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Month)"
+              [class.active]="view === CalendarView.Month"
+            >
+              Month
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week"
+            >
+              Week
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day"
+            >
+              Day
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+          *ngSwitchCase="CalendarView.Month"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          [cellTemplate]="customCellTemplate"
+          [activeDayIsOpen]="activeDayIsOpen"
+          (dayClicked)="dayClicked($event.day)"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view
+          *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view
+          *ngSwitchCase="CalendarView.Day"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventTimesChanged)="eventTimesChanged($event)"
+        >
+        </mwl-calendar-day-view>
+      </div>
+      <ng-template #customCellTemplate let-day="day" let-locale="locale">
+        <div class="cal-cell-top">
+          <span class="cal-day-badge" *ngIf="day.badgeTotal > 0"
+            >{{ day.badgeTotal }}</span
+          >
+          <span class="cal-day-number"
+            >{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span
+          >
+          <!-- <mat-icon>add</mat-icon> -->
+        </div>  
+        <span class="icon-style"  [ngClass]="{'disable-button':!isAdmin}"> <mat-icon  (click)="addTask()">add_circle</mat-icon></span>
+      </ng-template>
+</ng-container>
+</ng-container>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type="ball-spin-clockwise" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

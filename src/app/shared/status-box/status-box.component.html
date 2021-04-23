@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+    <h2 mat-dialog-title>{{updateCondition?'Update Status':'Add Status' }}</h2>
+  <button (click)="addGroup()" class="btn btn-info">Add</button>
+  <br>
+
+  <div class="mt-2"  cdkDropList class="example-list" formArrayName="mainstatus" *ngFor="let time of form.controls.mainstatus?.value; let i = index; trackBy:trackByFn">
+    <div [formGroupName]="i" class="d-flex align-items-center " cdkDrag>
+      <input placeholder="Add status" class="form-control" type="text" formControlName="status">
+      <input  class="form-control" type="color" class="ml-2" formControlName="color">
+      <mat-icon class="ml-2" (click)="removeGroup(i)" mat-button  *ngIf="i!=0">remove</mat-icon>
+    </div>
+  
+  </div>
+
+  <br>
+  <button (click)="onSubmit()" type="button" mat-button  >Submit</button>
+</form>

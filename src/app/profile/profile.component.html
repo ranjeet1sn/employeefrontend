@@ -1,0 +1,31 @@
+<div class="conatiner">
+<div class="child">
+  <button mat-fab color="primary" class="ml-5 mt-4" type="button" (click)="file.click()">
+    <img [src]="imagePreview" alt="title">
+  </button><br>
+  <input type="file" hidden #file  (change)="onImagePicked($event.target.files)">
+  <mat-form-field appearance="outline" class="mt-4">
+    <mat-label>Name</mat-label>
+   <input type="text" matInput [formControl]="name">
+   <mat-icon matSuffix>person</mat-icon>
+  </mat-form-field><br>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input type="email" readonly matInput [formControl]="email">
+    <mat-icon matSuffix>email</mat-icon>
+   </mat-form-field><br>
+   <mat-form-field appearance="outline">
+    <mat-label>Address</mat-label>
+    <textarea type="text" matInput [formControl]="address"></textarea>
+    <mat-icon matSuffix>home</mat-icon>
+   </mat-form-field><br>
+   <mat-form-field appearance="outline">
+    <mat-label>Phone Number</mat-label>
+    <input type="number" matInput [formControl]="number">
+    <mat-icon matSuffix>phone</mat-icon>
+   </mat-form-field><br>
+   <button type="button" class="btn btn-info" type="button" (click)="onSubmit()">Update</button>
+</div>
+</div><hr>
+<div id="map" class="mt-3"></div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type="ball-spin-clockwise" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

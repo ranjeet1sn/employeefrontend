@@ -1,0 +1,53 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav >
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <h2> Employee Management </h2>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-nav-list>
+        <ng-container *ngIf="isAuthenticated">
+          <div class="sidenav-style"   [routerLink]="'/home'"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon class="ml-2">home</mat-icon>
+            <a mat-list-item> Home </a>
+          </div>
+          <div class="sidenav-style  mt-3"   [routerLink]="'/dashboard'"  routerLinkActive="active">
+            <mat-icon class="ml-2">dashboard</mat-icon>
+            <a mat-list-item> Dashboard </a>
+          </div>
+          <div class="sidenav-style   mt-3"  [routerLink]="'/chat'" routerLinkActive="active" >
+            <mat-icon class="ml-2">chat</mat-icon>
+        <a mat-list-item > Chat </a>
+      </div>
+      <div class="sidenav-style mt-3"   [routerLink]="'/profile'"  routerLinkActive="active">
+        <mat-icon class="ml-2">person</mat-icon>
+        <a mat-list-item> Profile </a>
+      </div>
+      <div class="sidenav-style mt-3"   [routerLink]="'/task'"  routerLinkActive="active">
+        <mat-icon class="ml-2">add_task</mat-icon>
+        <a mat-list-item>  Add Task  </a>
+      </div>
+     
+    </ng-container>
+    <ng-container *ngIf="!isAuthenticated">
+      <div class="sidenav-style mt-3"  [routerLink]="'/auth/login'" routerLinkActive="active">
+        <mat-icon class="ml-2">login</mat-icon>
+        <a mat-list-item>  Login   </a>
+      </div>
+      <div class="sidenav-style mt-3"  [routerLink]="'/auth/register'" routerLinkActive="active">
+        <mat-icon class="ml-2">how_to_reg</mat-icon>
+        <a mat-list-item>  Register   </a>
+      </div>
+        <a mat-list-item >  </a>
+        <a mat-list-item >  </a>
+    </ng-container>
+  
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;">
+  
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

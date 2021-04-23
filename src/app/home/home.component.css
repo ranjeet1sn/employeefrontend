@@ -1,0 +1,52 @@
+.header-div {
+  display: flex;
+  justify-content: space-between;
+}
+img {
+  height: 65px;
+  width: 77px;
+  border-radius: 25px;
+}
+.example-card {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 25px;
+}
+.title-div {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.add-button {
+  border-radius: 25px;
+}
+mat-card-title {
+  font-size: 15px;
+}
+
+mat-icon {
+  color: #8e8686;
+  cursor: pointer;
+}
+mat-icon:hover {
+  color: #e07d7d;
+}
+.empty-div {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+.child-div{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.subtitle-div{
+  display: flex;
+  justify-content: flex-end;
+}
+mat-paginator{
+  background:none;
+}

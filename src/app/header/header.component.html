@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <mat-icon (click)="toggleSidebar()" style="color: #fff;cursor: pointer;" class="mr-5">menu</mat-icon>
+    <a class="navbar-brand" routerLink="/">
+      <img src="../../assets//images.png" class="img" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" (click)="isCollapsed = !isCollapsed"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed" id="navbarResponsive">
+      <span class="space"></span>
+      <div mat-card-avatar class="example-header-image"></div>
+      <button mat-fab color="primary" [matMenuTriggerFor]="menu" [ngStyle]="{'backgroundColor':backgroundColor}" style="color: #fff;">
+
+        <img  style="width: 20px;" src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-container *ngIf="isAuthenticated">
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <span (click)="onLogout()">Logout</span>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="!isAuthenticated">
+          <button mat-menu-item routerLink="/auth/login">
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+          <button mat-menu-item routerLink="/auth/register">
+            <mat-icon>how_to_reg</mat-icon>
+            <span >Register</span>
+          </button>
+        </ng-container>
+      </mat-menu>
+    </div>
+  </div>
+</nav>

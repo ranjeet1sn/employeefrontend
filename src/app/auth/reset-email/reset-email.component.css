@@ -1,0 +1,25 @@
+mat-card{
+    width: fit-content;
+}
+.container{
+    display: flex;
+    justify-content: center;
+}
+input{
+    width: fit-content;
+}
+.inner-div{
+    display: flex;
+    justify-content: center;
+}
+.header-div{
+    display: flex;
+    justify-content: center;
+}
+.last-div{
+    display: flex;
+    justify-content: center;
+}
+mat-icon{
+    cursor: pointer;
+}

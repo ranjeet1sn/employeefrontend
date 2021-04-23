@@ -1,0 +1,41 @@
+<ng-container *ngIf="!url?.includes('details')">
+<div class="container">
+  <div class="header-div mt-3">
+    <span></span>
+    <button class="btn btn-success add-button" (click)="onAddEmployee()">Add Employee</button>
+  </div>
+  <div *ngIf="employees.length>0;else noPost" class="mt-3">
+    <div class="child-div">
+      <input class="form-control" placeholder="Search & Enter" (keyup.enter)="onSearch($event.target.value)"
+        style="width: fit-content;">
+     
+    </div>
+    <div>
+      <div class="subtitle-div" >
+      <p><span style="    font-weight: 500;">Total Employees : </span> {{totalPost}}</p>
+      </div>
+      <hr>
+      <div class="title-div mt-3" #content>
+      </div>
+      <mat-card class="example-card mt-4" *ngFor="let item of employees">
+          <div style="font-weight: 500;">
+        <p>Name :  {{ item.name|uppercase}}</p>
+        <p>Age  :  {{ item.age}}</p>
+      </div>
+        <mat-icon (click)="editEmployee(item)" title="edit">edit</mat-icon>
+        <mat-icon (click)="sendEmail(item.email)" title="mail">email</mat-icon>
+        <mat-icon (click)="removeEmployee(item._id)" title="delete">delete</mat-icon>
+        <a [routerLink]="['/home/details', item._id]">Details</a>
+      </mat-card>
+    </div>
+    <mat-paginator [length]="totalPost" [pageSize]="postPerPage" [pageSizeOptions]="postSizeOptions "
+      (page)="onPageChange($event)" >
+    </mat-paginator>
+  </div>
+  <ng-template #noPost>
+    <p class="empty-div">No Post Found</p>
+  </ng-template>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type="ball-spin-clockwise" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+</ng-container>
+<router-outlet></router-outlet>

@@ -1,0 +1,29 @@
+.cursor{
+  cursor: pointer;
+}
+.space{
+  flex: 1 1 auto;
+}
+.img{
+  height: 57px;
+  width: 79px;
+
+}
+li{
+  cursor: pointer;
+}
+.profile-div{
+  display: flex;
+  align-items: baseline;
+}
+a{
+  cursor: pointer;
+  color:  #000 !important;
+}
+a:hover{
+  color: #007bff !important;
+}
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

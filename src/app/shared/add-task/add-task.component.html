@@ -1,0 +1,61 @@
+<div class="container">
+    <h2 mat-dialog-title>Create Task</h2>
+    <hr>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline"  class="ml-3">
+            <mat-label>Task Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="taskForm.controls.name.hasError('required')">Name Is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="ml-3">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+            <mat-error *ngIf="taskForm.controls.description.hasError('required')">Description Is required</mat-error>
+        </mat-form-field><br>
+        <mat-form-field appearance="outline"  class="ml-3">
+            <mat-label>Add Assignee</mat-label>
+            <mat-select formControlName="assignee">
+                <mat-option *ngFor="let user of users" [value]="user">
+                    <button mat-mini-fab color="accent" class="mr-2" [ngStyle]="{'backgroundColor':user.color}">
+                        <mat-icon>person</mat-icon>
+                      </button>
+                    {{user.email|short}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="taskForm.controls.assignee.hasError('required')">Assignee Is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="ml-3">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="priority">
+                <mat-option *ngFor="let item of priority" [value]="item.value">
+                    {{item.viewValue}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="taskForm.controls.priority.hasError('required')">Priority Is required</mat-error>
+        </mat-form-field><br>
+        <mat-form-field appearance="outline"  class="ml-3">
+            <mat-label>Completion Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="taskForm.controls.date.hasError('required')">Date Is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="ml-3">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let item of statusArray" [value]="item">
+            {{item.status}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="taskForm.controls.status.hasError('required')">Status Is required</mat-error>
+      </mat-form-field>
+        <hr>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button type="submit" [disabled]="taskForm.invalid">Submit</button>
+        </mat-dialog-actions>
+    </form>
+   
+
+
+</div>

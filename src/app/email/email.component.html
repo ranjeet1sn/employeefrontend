@@ -1,0 +1,19 @@
+<div class="upper-div">
+<h2 mat-dialog-title>Send Mail</h2>
+<mat-icon mat-dialog-close>close</mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+<mat-form-field appearance="outline">
+  <mat-label>email</mat-label>
+  <input [formControl]='email' matInput placeholder="To">
+</mat-form-field><br>
+<mat-form-field appearance="outline">
+  <mat-label>Subject</mat-label>
+  <input  [formControl]='subject' matInput placeholder="Enter Subject">
+</mat-form-field><br>
+<ckeditor [formControl]='description' [config]="ckeConfig" debounce="500"></ckeditor>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button  type="button" (click)="sendMail()" color="primary">Send</button>
+</mat-dialog-actions>

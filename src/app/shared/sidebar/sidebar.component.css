@@ -1,0 +1,25 @@
+mat-sidenav{
+    width: 250px;
+}
+.active{
+    background-color: #aaa7b3 !important;
+    outline: none !important;
+}
+.sidenav-style{
+    display: flex;
+    align-items: center;
+    
+}
+mat-nav-list:focus{
+    outline: none !important;
+}
+mat-nav-list{
+    outline: none !important;
+}
+md-sidenav, 
+md-sidenav.md-locked-open, 
+md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 0px !important;
+    width: auto !important;
+    max-width: none !important;
+}

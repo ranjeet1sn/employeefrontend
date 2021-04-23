@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <span></span>
+    <mat-card>
+        <div class="header-div">
+            <mat-icon class="mr-3" routerLink="../login">chevron_left</mat-icon>
+            <p class="text-justify font-weight-bold">Reset your password</p>
+        </div>
+        <p class=" text-wrap">Enter your email address to reset your password.</p>
+        <div class="inner-div">
+            <form [formGroup]="resetEmail">
+                <mat-form-field appearance="outline">
+                    <input formControlName="email" matInput placeholder="Enter Email">
+                <mat-error *ngIf="resetEmail.controls.email.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="resetEmail.controls.email.hasError('email')">Please enter a valid email</mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="last-div">
+            <span></span>
+            <button class="btn btn-primary mt-3" type="button" (click)="sendLink()">Next</button>
+        </div>
+    </mat-card>
+</div>

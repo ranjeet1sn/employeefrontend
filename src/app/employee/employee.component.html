@@ -1,0 +1,63 @@
+<div class="container">
+  <div>
+    <h2 mat-dialog-title>{{id?'Update Employee':'Add Employee'}}</h2>
+  </div>
+  <hr>
+  <div>
+    <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Enter Your Name" formControlName="name">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="employeeForm.controls.name.hasError('required')">Name Is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="ml-3">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" placeholder="Enter Age" formControlName="age">
+        <mat-error *ngIf="employeeForm.controls.age.hasError('required')">Age Is required</mat-error>
+      </mat-form-field><br>
+      <div class="drag-div" appDragDrop (dropFiles)="onImagePicked($event)">
+        <p>Drag and Drop or upload your image here</p>
+        <input type="file" hidden #file (change)="onImagePicked($event.target.files)">
+        <div style="display: flex;">
+          <span></span>
+          <button class="image-button" type="button" (click)="file.click()" mat-button>Add Image</button>
+        </div>
+      </div>
+      <div class="mt-3" style="display: flex;" (click)="clearImage()" *ngIf="imagePreview">
+        <img [src]="imagePreview" />
+        <mat-icon>close</mat-icon>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>email</mat-label>
+        <input matInput type="email" placeholder="Enter Email" (blur)="checkUniqueEmail()" formControlName="email">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="employeeForm.controls.email.hasError('required')">Email Is required</mat-error>
+        <mat-error *ngIf="employeeForm.controls.email.hasError('email')">Type should be email</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="ml-3">
+        <mat-label>Select Department</mat-label>
+        <mat-select formControlName="department">
+          <mat-option value="desginer">Desgining</mat-option>
+          <mat-option value="testing">Testing</mat-option>
+          <mat-option value="developer">Developer</mat-option>
+          <mat-option value="manager">Project Manager</mat-option>
+          <mat-option value="trainee">Trainee</mat-option>
+        </mat-select>
+        <mat-error *ngIf="employeeForm.controls.department.hasError('required')">Department Is required</mat-error>
+      </mat-form-field>
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button value="male" class="ml-3">Male</mat-radio-button>
+        <mat-radio-button value="female" class="ml-2">Female</mat-radio-button>
+      </mat-radio-group><br>
+      <span *ngIf="uniqueEmail" class="error-msg">Email must be unique</span>
+      <hr>
+  
+      <div class="submit-div">
+        <button mat-raised-button type="submit" color="primary" [disabled]="employeeForm.invalid &&uniqueEmail">Submit</button>
+        <button mat-raised-button type="button" class="ml-2" color="warn" mat-dialog-close>Cancel</button>
+      </div>
+    </form>
+
+  </div>
+</div>

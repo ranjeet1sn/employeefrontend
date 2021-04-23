@@ -1,0 +1,5 @@
+svg > g:last-child > g:last-child { pointer-events: none }
+
+google-chart{
+    cursor: pointer;
+}

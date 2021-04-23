@@ -1,0 +1,35 @@
+.drag-div{
+  background: #c5c6c8;
+  width: 100%;
+  padding-bottom: 66%;
+}
+p{
+  text-align: center;
+  margin: auto;
+  position: relative;
+  top: 120px;
+}
+img{
+  height: 109px;
+  width: 116px;
+}
+mat-icon{
+  position: relative;
+  right: 23px;
+  cursor: pointer;
+}
+.container{
+  max-height: calc(100vh - 21vh);
+}
+.submit-div{
+  padding-bottom: 15px;
+}
+.image-button{
+  text-align: center;
+  margin: auto;
+  position: relative;
+  top: 140px;
+}
+.error-msg{
+  color: #f44336;
+}

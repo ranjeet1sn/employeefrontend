@@ -1,0 +1,27 @@
+<div class="conatiner">
+    <header>
+        Task Assign To Me
+    </header>
+    <hr>
+    <div *ngFor="let task of userTask;let i=index">
+        <p>{{i+1}}</p>
+        <div class="div-style">
+            <mat-icon>calendar_today</mat-icon>
+         {{task.date|date}}
+        </div>
+        <div class="div-style">
+            <mat-icon>badge</mat-icon>
+         {{task.name}}
+        </div>
+        <div class="div-style">
+            <mat-icon>description</mat-icon>
+         {{task.description}}
+    </div>
+    <div class="div-style">
+        <mat-icon>priority_high</mat-icon>
+     {{task.description}}
+</div>
+<hr *ngIf="!((i + 1) == (userTask.length))">
+</div>
+
+</div>

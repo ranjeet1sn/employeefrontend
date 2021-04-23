@@ -1,0 +1,23 @@
+mat-card{
+  box-shadow: 0 10px 6px -6px #777;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(150deg, rgb(220, 220, 220) 0, rgb(255, 255, 255) 50%, rgb(220, 220, 220) 100%);
+  padding: 3rem;
+  flex: 1 1 600px;
+  max-height: 600px;
+  min-width: 600px;
+  width: 200px;
+  height: 208px;
+  margin-left: 300px;
+}
+
+div{
+  height: 110px;
+}
+.error-code{
+  text-align: center;
+}
+.end-div{
+  display: flex;
+  justify-content: center;
+}

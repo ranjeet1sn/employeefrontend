@@ -1,0 +1,30 @@
+.example-card{
+    width: fit-content;
+   padding: 32px 50px 29px 76px
+}
+.main-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+button{
+    position: relative;
+    right: 68px;
+}
+mat-icon{
+    font-size: 21px;
+}
+.title-div{
+    font-weight: 600;
+}
+:host::ng-deep .mat-card-title{
+    font-weight: 100 !important;
+    font-size: 16px;
+}
+:host::ng-deep .mat-card-subtitle{
+  color:  #000 !important;
+}
+.title-style{
+    position: relative;
+    right: 56px;
+}

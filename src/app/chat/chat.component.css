@@ -1,0 +1,20 @@
+.upper-div{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
+
+}
+.lower-div{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+
+}
+.textarea{
+  width: 500px
+
+}

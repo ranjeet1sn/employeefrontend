@@ -1,0 +1,17 @@
+.child {
+  margin: auto;
+  width: 31%;
+}
+
+
+img{
+  width: 43px;
+  height: 39px;
+  margin-top: -6px;
+}
+  
+#map {
+  height: 60vh;
+  width: 80vh;
+  margin: auto;
+}

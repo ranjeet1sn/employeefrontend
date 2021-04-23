@@ -1,0 +1,50 @@
+<div class="container-fluid ml-3">
+  <div class="row">
+    <h2>Employee Chat </h2>
+
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <select name="roomInput" class="form-control" [(ngModel)]="name">
+          <option [value]="item.name" *ngFor="let item of userName">{{item.name}}</option>
+        </select>
+        <!-- <small id="userHelp" class="form-text text-muted">Type your username.</small> -->
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label for="roomInput">Choose room</label>
+      <select name="roomInput" [(ngModel)]="user" id="roomInput" class="form-control">
+        <option value="hr">Hr</option>
+        <option value="develop">Development Group</option>
+        <option value="review">Review</option>
+      </select>
+    </div>
+    <div class="col sm-2 mt-2">
+      <div style="margin-top:19px;" class="pull-right">
+        <button type="button" class="btn btn-primary " (click)="joinRoom()">Join</button>
+        <button type="button" class="btn btn-danger ml-2" (click)='leaveRoom()'>Leave</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="well" style="height:200px; padding:15px;">
+      <div *ngFor="let item of messageList">
+        <span><strong>{{item.user}} : </strong> {{item.message}}</span>
+
+      </div>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" [(ngModel)]="message">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-success pull-right" (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type="ball-spin-clockwise" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

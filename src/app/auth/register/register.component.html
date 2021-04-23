@@ -1,0 +1,35 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <img src="../../../assets/281-2818540_man-enter-login-signup-comments-sign-up-icon.png"
+        style="height: 100px;width: 100px;" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="registeForm" (ngSubmit)="onSubmit()" class="mt-2">
+      <mat-form-field class="fadeIn second" appearance="outline">
+        <input type="text" formControlName="email" matInput placeholder="Enter Email">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="registeForm.controls.email.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="registeForm.controls.email.hasError('email')">Type Should be Email</mat-error>
+      </mat-form-field><br>
+      <mat-form-field appearance="outline">
+        <input [type]="type?'password':'text'" matInput formControlName="password" class="fadeIn third"
+          placeholder="Enter Password">
+        <mat-icon matSuffix (click)="type =! type">{{type ? 'visibility':'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="registeForm.controls.password.hasError('required')">Password is required</mat-error>
+      </mat-form-field><br>
+      <mat-form-field appearance="outline">
+        <input type="password" (blur)="onPasswordCheck()" matInput formControlName="confirmpassword"
+          class="fadeIn third" placeholder="Enter Confirm Password">
+      </mat-form-field><br>
+      <button type="submit" [ngClass]="{'disable-button': disableForm  || registeForm.invalid}"
+        [disabled]="disableForm ||   registeForm.invalid ">Register</button>
+    </form>
+
+    <div id="formFooter">
+      <a class="underlineHover" routerLink="/auth/login">Already Have Account?Login here</a>
+    </div>
+
+  </div>
+</div>

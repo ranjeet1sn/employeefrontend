@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+         <mat-card>
+             <mat-card-title>Pie Charts</mat-card-title>
+             <mat-card-content>
+                <google-chart #chart
+                [title]="title"
+                [type]="type"
+                [data]="data"
+                [options]="options"
+                [width]="width"
+                (select)="onSelect($event)"
+                [height]="height">
+             </google-chart>
+             </mat-card-content>
+
+         </mat-card>
+        </div>
+        <div class="col">
+        <mat-card>
+             <mat-card-title>Bar Charts</mat-card-title>
+             <mat-card-content>
+                <google-chart #chart
+                [title]="title"
+                (select)="onSelect($event)"
+                type="BarChart"
+                [data]="data"
+                [options]="options"
+                [width]="width"
+                [height]="height">
+             </google-chart>
+             </mat-card-content>
+             
+         </mat-card>
+        </div>
+    </div>
+
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type="ball-spin-clockwise" [fullScreen] = "true" ><p style="color: white" >  </p></ngx-spinner>
