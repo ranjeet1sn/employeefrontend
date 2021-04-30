@@ -86,6 +86,8 @@
 </mat-table>
       <mat-paginator class="common-style"  [length]="totalPost" [pageSize]="postPerPage" [pageSizeOptions]="postSizeOptions "
       (page)="onPageChange($event)"></mat-paginator>
+ 
+     
 </ng-container>
 <hr  *ngIf="showCalendar">
 <ng-container  *ngIf="showCalendar">

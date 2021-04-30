@@ -40,7 +40,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   CalendarView = CalendarView;
   postSizeOptions = [2, 5, 10, 15];
   viewDate: Date = new Date();
-  totalPost: number = 10;
+  totalPost: number ;
   postPerPage: number = 2;
   currentPage: number = 1;
   showCalendar = false;
@@ -49,6 +49,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   activeDayIsOpen: boolean = false;
   refresh: Subject<any> = new Subject();
   isAdmin: boolean = false;
+  config:{};
   tasks = [];
   deleteArray = [];
   assignee: string;
@@ -110,6 +111,14 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.showSpinner();
     this.subscription.push(this.taskService.getAllTask(postPerPage, currentPage, assignee).subscribe((res: any) => {
       this.totalPost = res.totalPost;
+      this.config = {
+        id: 'basicPaginate',
+        itemsPerPage: postPerPage,
+        currentPage: currentPage,
+        totalItems: this.totalPost
+      };
+      
+      
       this.dataSource = new MatTableDataSource(res.data);
       this.dataSource.sort = this.sort;
       res.data.forEach(element => {
@@ -196,6 +205,8 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   onPageChange(event) {
+    console.log(event);
+    
     this.currentPage = event.pageIndex + 1;
     this.postPerPage = event.pageSize;
     this.getTask(this.postPerPage, this.currentPage);
@@ -254,7 +265,10 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-
+  getPage(event){
+   console.log(event);
+   
+  }
   /** The label for the checkbox on the passed row */
   checkboxLabel(row?: any) {
     if (!row) {

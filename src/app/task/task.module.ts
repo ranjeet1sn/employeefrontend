@@ -18,6 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import { ToastrModule } from 'ngx-toastr';
+import {NgxPaginationModule} from 'ngx-pagination'
 const routes:Routes=[
   {
     path:'',
@@ -51,6 +52,7 @@ const routes:Routes=[
     ToastrModule.forRoot({
       positionClass: 'toast-top-right'
     }),
+    NgxPaginationModule
   ]
 })
 export class TaskModule { }

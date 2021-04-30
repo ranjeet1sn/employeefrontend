@@ -17,7 +17,12 @@
       <hr>
       <div class="title-div mt-3" #content>
       </div>
-      <mat-card class="example-card mt-4" *ngFor="let item of employees">
+      <mat-card class="example-card mt-4" *ngFor="let item of employees| paginate: {
+        id: 'basicPaginate',
+        itemsPerPage: this.postPerPage,
+        currentPage: this.currentPage,
+        totalItems: this.totalPost
+      }">
           <div style="font-weight: 500;">
         <p>Name :  {{ item.name|uppercase}}</p>
         <p>Age  :  {{ item.age}}</p>
@@ -28,9 +33,8 @@
         <a [routerLink]="['/home/details', item._id]">Details</a>
       </mat-card>
     </div>
-    <mat-paginator [length]="totalPost" [pageSize]="postPerPage" [pageSizeOptions]="postSizeOptions "
-      (page)="onPageChange($event)" >
-    </mat-paginator>
+    <pagination-controls id="basicPaginate" class="mt-2" (pageChange)="onPageChange($event)"></pagination-controls>
+
   </div>
   <ng-template #noPost>
     <p class="empty-div">No Post Found</p>

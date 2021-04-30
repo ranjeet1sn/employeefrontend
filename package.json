@@ -33,6 +33,7 @@
     "jspdf": "^1.5.3",
     "ng2-ckeditor": "^1.2.0",
     "ngx-image-zoom": "^0.6.0",
+    "ngx-pagination": "^5.0.0",
     "ngx-spinner": "^11.0.1",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",

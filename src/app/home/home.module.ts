@@ -16,6 +16,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { ZoomImageDirective } from './zoom-image.directive';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DetailsComponent } from './details/details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 const routes: Routes = [
   {
     path: '',
@@ -51,7 +52,8 @@ const routes: Routes = [
     EmailModule,
     EmployeeModule,
     NgxImageZoomModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPaginationModule
   ],
   entryComponents: [
     ImagePreviewComponent,
